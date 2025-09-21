@@ -38,3 +38,12 @@ todosDigitosIguales x | x < 10 && x >= 0 = True
                       | otherwise = todosDigitosIguales (div x 10)
 
 -- ejercicio 7
+iesimoDigito :: Integer -> Integer -> Integer
+iesimoDigito x z | z > cantDigitos x || z < 0 = undefined
+                 | z == cantDigitos x = mod x 10
+                 | otherwise = iesimoDigito (div x 10) z
+
+cantDigitos :: Integer -> Integer
+cantDigitos x | x >=0 && x < 10 = 1
+              | otherwise =  1 + cantDigitos (div x 10)                                                                                                                                                       
+
