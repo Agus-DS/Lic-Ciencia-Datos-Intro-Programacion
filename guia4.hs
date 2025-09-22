@@ -46,4 +46,32 @@ iesimoDigito x z | z > cantDigitos x || z < 0 = undefined
 cantDigitos :: Integer -> Integer
 cantDigitos x | x >=0 && x < 10 = 1
               | otherwise =  1 + cantDigitos (div x 10)                                                                                                                                                       
+-- ejercicio 8
+sumaDigitos :: Integer -> Integer 
+sumaDigitos x | x == 0 = x
+              | otherwise = mod x 10 + sumaDigitos (div x 10)
 
+-- ejercicio 9 
+esCapicua :: Integer -> Bool
+esCapicua x | x >= 0 && x < 10 = True
+            | ultimo  /=  primero = False 
+            | otherwise = esCapicua (div x 10 - primero * 10 ^ (cantDigitos x-2))
+             where ultimo =  mod x 10
+                   primero = iesimoDigito x 1
+
+-- ejercicio 11
+eAprox :: Int -> Float
+eAprox 0 = 1
+eAprox x =  eAprox(x-1) + (1 / fromIntegral (factorial x))
+
+factorial :: Int -> Int
+factorial 0 = 1
+factorial x = x*factorial(x-1)
+
+e :: Float
+e = eAprox 10
+
+-- ejercicio 12
+raizDe2Aprox :: Int -> Float
+raizDe2Aprox 0 = 2
+raizDe2Aprox x =  (2 + (1 / fromIntegral x-1)) + raizDe2Aprox(x-1)
