@@ -75,3 +75,26 @@ e = eAprox 10
 raizDe2Aprox :: Int -> Float
 raizDe2Aprox 0 = 2
 raizDe2Aprox x =  (2 + (1 / fromIntegral x-1)) + raizDe2Aprox(x-1)
+
+-- ejercicio 14
+sumaPotencias :: Int -> Int -> Int -> Int
+sumaPotencias x 1 z = x ^ 1+z
+sumaPotencias x y z = sumaPotencias x (y-1) z + sumaPotencia x y z
+
+sumaPotencia :: Int -> Int -> Int -> Int
+sumaPotencia x y 1 = x ^ (y+1)
+sumaPotencia x y z = sumaPotencia x y (z-1) + x ^ y+z 
+
+--ejercicio 19
+esSumaInicialDePrimos :: Int -> Bool 
+esSumaInicialDePrimos x = x
+
+kEsimoPrimo :: Int -> Int !!
+
+
+--- se resuelve sumaKprimos usando nEsimoPrimo que suma la 
+
+nEsimoPrimo :: Int -> Int
+nEsimoPrimo 1 = 2
+nEsimoPrimo 2 = 3
+nEsimoPrimo x =  2 + nEsimoPrimo(x-1)
