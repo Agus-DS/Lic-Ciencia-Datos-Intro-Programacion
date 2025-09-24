@@ -72,18 +72,41 @@ e :: Float
 e = eAprox 10
 
 -- ejercicio 12
-raizDe2Aprox :: Int -> Float
-raizDe2Aprox 0 = 2
-raizDe2Aprox x =  (2 + (1 / fromIntegral x-1)) + raizDe2Aprox(x-1)
+funAux :: Integer -> Float
+funAux 1 = 2
+funAux x =  2 +  1 / funAux( x-1)
+
+raizDe2Aprox :: Integer -> Float
+raizDe2Aprox x = funAux x - 1
+
+--ejercicio 13
+sumatoria :: Integer -> Integer -> Integer
+sumatoria 1 1 = 1
+sumatoria  x y =  sumatoria1 x y + 1^y + sumatoria 1 (y-1)
+
+sumatoria1 :: Integer -> Integer -> Integer
+sumatoria1 1 y = 1^y
+sumatoria1 x y  = x^y + sumatoria1 (x-1) y
 
 -- ejercicio 14
 sumaPotencias :: Int -> Int -> Int -> Int
 sumaPotencias x 1 z = x ^ 1+z
 sumaPotencias x y z = sumaPotencias x (y-1) z + sumaPotencia x y z
 
+
+
 sumaPotencia :: Int -> Int -> Int -> Int
 sumaPotencia x y 1 = x ^ (y+1)
 sumaPotencia x y z = sumaPotencia x y (z-1) + x ^ y+z 
+
+-- ejercicio 15
+sumaRacionales :: Integer -> Integer -> Float
+sumaRacionales 1 1 = 1
+sumaRacionales  x y =  sumaRacionales1 x y + fromIntegral (div 1  y) + sumaRacionales 1 (y-1)
+
+sumaRacionales1 :: Integer -> Integer -> Float
+sumaRacionales1 1 y = fromIntegral (div 1 y)
+sumaRacionales1 x y  = fromIntegral (div x y)+ sumaRacionales1 (x-1) y
 
 --ejercicio 19
 esSumaInicialDePrimos :: Int -> Bool 
@@ -98,3 +121,4 @@ nEsimoPrimo :: Int -> Int
 nEsimoPrimo 1 = 2
 nEsimoPrimo 2 = 3
 nEsimoPrimo x =  2 + nEsimoPrimo(x-1)
+
