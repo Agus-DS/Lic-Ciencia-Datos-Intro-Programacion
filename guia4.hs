@@ -52,7 +52,7 @@ sumaDigitos x | x == 0 = x
               | otherwise = mod x 10 + sumaDigitos (div x 10)
 
 -- ejercicio 9 
-esCapicua :: Integer -> Bool
+esCapicua :: Integer -> Booln,t) ++ ((n1,t1):lc)
 esCapicua x | x >= 0 && x < 10 = True
             | ultimo  /=  primero = False 
             | otherwise = esCapicua (div x 10 - primero * 10 ^ (cantDigitos x-2))
@@ -82,7 +82,40 @@ raizDe2Aprox x = funAux x - 1
 --ejercicio 13
 sumatoria :: Integer -> Integer -> Integer
 sumatoria 1 1 = 1
-sumatoria  x y =  sumatoria1 x y + 1^y + sumatoria 1 (y-1)
+sumatoria  x y =  sumatoria1 x y +quitar :: (Eq t) =>  t -> [t] -> [t]
+quitar e [] = []
+quitar e (x:xs) | e == x = xs
+              | otherwise = quitar e xs
+
+maximo :: (Ord t) => [t] -> t
+maximo [x] = x
+maximo (x:xs) | x > (maximo xs) = x
+              | otherwise = maximo xs
+
+ordenar :: (Ord t) => [t] -> [t]
+ordenar [] = [] 
+ordenar (x:xs) = (ordenar (quitar (maximo (x:xs)) (x:xs))) ++ [maximo(x:xs)]
+
+
+type Texto = [Char]
+type Nombre = Texto
+type Telefono = Texto
+type Contacto = (Nombre, Telefono)
+type ContactosTel = [Contacto]
+
+enLosContactos :: Nombre -> ContactosTel -> Bool
+enLosContactos _ [] =  False
+enLosContactos n ((m,t):lc) | n == m = True
+                            | otherwise = enLosContactos n lc
+
+agregarContacto :: Contacto -> ContactosTel -> ContactosTel
+agregarContacto c [] = [c]
+agregarContacto (n,t) ((n1,t1):lc) | n == n1 = ((n,t):lc)
+                                   | otherwise = (n1,t1) : agregarContacto (n,t) lc 
+
+
+
+multiplicarFilas :: [[Integer]] -> [Integer] 1^y + sumatoria 1 (y-1)
 
 sumatoria1 :: Integer -> Integer -> Integer
 sumatoria1 1 y = 1^y
@@ -94,7 +127,7 @@ sumaPotencias x 1 z = x ^ 1+z
 sumaPotencias x y z = sumaPotencias x (y-1) z + sumaPotencia x y z
 
 
-
+n,t) ++ ((n1,t1):lc)
 sumaPotencia :: Int -> Int -> Int -> Int
 sumaPotencia x y 1 = x ^ (y+1)
 sumaPotencia x y z = sumaPotencia x y (z-1) + x ^ y+z 
@@ -121,4 +154,5 @@ nEsimoPrimo :: Int -> Int
 nEsimoPrimo 1 = 2
 nEsimoPrimo 2 = 3
 nEsimoPrimo x =  2 + nEsimoPrimo(x-1)
+
 
