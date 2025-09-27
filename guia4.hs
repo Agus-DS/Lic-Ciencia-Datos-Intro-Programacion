@@ -82,44 +82,12 @@ raizDe2Aprox x = funAux x - 1
 --ejercicio 13
 sumatoria :: Integer -> Integer -> Integer
 sumatoria 1 1 = 1
-sumatoria  x y =  sumatoria1 x y +quitar :: (Eq t) =>  t -> [t] -> [t]
-quitar e [] = []
-quitar e (x:xs) | e == x = xs
-              | otherwise = quitar e xs
-
-maximo :: (Ord t) => [t] -> t
-maximo [x] = x
-maximo (x:xs) | x > (maximo xs) = x
-              | otherwise = maximo xs
-
-ordenar :: (Ord t) => [t] -> [t]
-ordenar [] = [] 
-ordenar (x:xs) = (ordenar (quitar (maximo (x:xs)) (x:xs))) ++ [maximo(x:xs)]
-
-
-type Texto = [Char]
-type Nombre = Texto
-type Telefono = Texto
-type Contacto = (Nombre, Telefono)
-type ContactosTel = [Contacto]
-
-enLosContactos :: Nombre -> ContactosTel -> Bool
-enLosContactos _ [] =  False
-enLosContactos n ((m,t):lc) | n == m = True
-                            | otherwise = enLosContactos n lc
-
-agregarContacto :: Contacto -> ContactosTel -> ContactosTel
-agregarContacto c [] = [c]
-agregarContacto (n,t) ((n1,t1):lc) | n == n1 = ((n,t):lc)
-                                   | otherwise = (n1,t1) : agregarContacto (n,t) lc 
-
-
-
-multiplicarFilas :: [[Integer]] -> [Integer] 1^y + sumatoria 1 (y-1)
+sumatoria  x y =  sumatoria1 x y + 1^y + sumatoria 1 (y-1)
 
 sumatoria1 :: Integer -> Integer -> Integer
 sumatoria1 1 y = 1^y
 sumatoria1 x y  = x^y + sumatoria1 (x-1) y
+
 
 -- ejercicio 14
 sumaPotencias :: Int -> Int -> Int -> Int
@@ -154,5 +122,6 @@ nEsimoPrimo :: Int -> Int
 nEsimoPrimo 1 = 2
 nEsimoPrimo 2 = 3
 nEsimoPrimo x =  2 + nEsimoPrimo(x-1)
+
 
 
