@@ -1,6 +1,7 @@
+
 -- Ejercicio 1
 
-fibonacci :: Int -> Int
+fibonacci :: Integer -> Integer
 fibonacci x | x < 0 = undefined
             | x == 0 = 0
             | x == 1 = 1
@@ -45,14 +46,16 @@ iesimoDigito x z | z > cantDigitos x || z < 0 = undefined
 
 cantDigitos :: Integer -> Integer
 cantDigitos x | x >=0 && x < 10 = 1
-              | otherwise =  1 + cantDigitos (div x 10)                                                                                                                                                       
+              | otherwise =  1 + cantDigitos (div x 10)
+
+
 -- ejercicio 8
 sumaDigitos :: Integer -> Integer 
 sumaDigitos x | x == 0 = x
               | otherwise = mod x 10 + sumaDigitos (div x 10)
 
--- ejercicio 9 
-esCapicua :: Integer -> Booln,t) ++ ((n1,t1):lc)
+-- ejercicio 9 PREGUNTAR
+esCapicua :: Integer -> Bool
 esCapicua x | x >= 0 && x < 10 = True
             | ultimo  /=  primero = False 
             | otherwise = esCapicua (div x 10 - primero * 10 ^ (cantDigitos x-2))
@@ -81,24 +84,14 @@ raizDe2Aprox x = funAux x - 1
 
 --ejercicio 13
 sumatoria :: Integer -> Integer -> Integer
-sumatoria 1 1 = 1
-sumatoria  x y =  sumatoria1 x y + 1^y + sumatoria 1 (y-1)
+sumatoria 0 _  = 0
+sumatoria 1 y = y
+sumatoria x y =  sumatoria (x-1) y + sumatoria1 x y
 
 sumatoria1 :: Integer -> Integer -> Integer
-sumatoria1 1 y = 1^y
-sumatoria1 x y  = x^y + sumatoria1 (x-1) y
+sumatoria1 _ 0 = 0
+sumatoria1 x y = x^y + sumatoria1 x (y-1)
 
-
--- ejercicio 14
-sumaPotencias :: Int -> Int -> Int -> Int
-sumaPotencias x 1 z = x ^ 1+z
-sumaPotencias x y z = sumaPotencias x (y-1) z + sumaPotencia x y z
-
-
-n,t) ++ ((n1,t1):lc)
-sumaPotencia :: Int -> Int -> Int -> Int
-sumaPotencia x y 1 = x ^ (y+1)
-sumaPotencia x y z = sumaPotencia x y (z-1) + x ^ y+z 
 
 -- ejercicio 15
 sumaRacionales :: Integer -> Integer -> Float
@@ -109,19 +102,39 @@ sumaRacionales1 :: Integer -> Integer -> Float
 sumaRacionales1 1 y = fromIntegral (div 1 y)
 sumaRacionales1 x y  = fromIntegral (div x y)+ sumaRacionales1 (x-1) y
 
---ejercicio 19
-esSumaInicialDePrimos :: Int -> Bool 
-esSumaInicialDePrimos x = x
 
-kEsimoPrimo :: Int -> Int !!
+-- ejercicio 16
+--a)
+menorDivisor :: Integer -> Integer
+menorDivisor x = listaARecorrer 2 x
 
+listaARecorrer :: Integer -> Integer -> Integer
+listaARecorrer d x | d == x = x
+                   | mod x d == 0 = d
+                   | otherwise = listaARecorrer (d + 1) x
 
---- se resuelve sumaKprimos usando nEsimoPrimo que suma la 
+--b)
+esPrimo :: Integer -> Bool
+esPrimo x = (menorDivisor x > 1) && (menorDivisor x == x)  
 
-nEsimoPrimo :: Int -> Int
-nEsimoPrimo 1 = 2
-nEsimoPrimo 2 = 3
-nEsimoPrimo x =  2 + nEsimoPrimo(x-1)
+--c) 
+sonCoPrimos :: Integer -> Integer -> Bool
+sonCoPrimos x y  = menorDivisor x /= menorDivisor y
 
+--d) 
+nEsimoPrimo :: Integer -> Integer
+nEsimoPrimo x = recorroPrimos 2 x
 
+recorroPrimos :: Integer -> Integer -> Integer 
+recorroPrimos x n | esPrimo x && n == 1 = x
+                  | esPrimo x  = recorroPrimos (x+1) (n-1)
+                  | otherwise = recorroPrimos (x+1) n
 
+-- ejercicio 17
+esFibonacci :: Integer -> Bool
+esFibonacci x = x == contadorFibonacci 1 x
+
+contadorFibonacci :: Integer -> Integer -> Integer
+contadorFibonacci c x | fibonacci c > x = fibonacci c 
+                      | fibonacci c == x = x 
+                      | otherwise = contadorFibonacci (c+1) x
