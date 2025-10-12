@@ -1,4 +1,3 @@
-
 -- Ejercicio 1
 
 fibonacci :: Integer -> Integer
@@ -138,3 +137,43 @@ contadorFibonacci :: Integer -> Integer -> Integer
 contadorFibonacci c x | fibonacci c > x = fibonacci c 
                       | fibonacci c == x = x 
                       | otherwise = contadorFibonacci (c+1) x
+
+--ejercicio 18 
+mayorDigitoPar :: Integer -> Integer
+mayorDigitoPar n | ultimoDigitoPar n > ultimoDigitoPar (div n 10)  = ultimoDigitoPar n 
+                 | ultimoDigitoPar n == 0 = -1
+                 | otherwise = mayorDigitoPar (div n 10)
+
+esPar :: Integer -> Bool
+esPar n | mod n 2 == 0 = True
+        | otherwise = False
+
+ultimoDigitoPar :: Integer -> Integer
+ultimoDigitoPar n | esPar(mod n 10) = mod n 10
+                  | otherwise = ultimoDigitoPar (div n 10)
+
+-- ejercicio 19
+esSumaInicialDePrimos :: Integer -> Bool
+esSumaInicialDePrimos n = sumaNesimoPrimos n 0 1
+
+                        
+sumaNesimoPrimos :: Integer -> Integer -> Integer -> Bool
+sumaNesimoPrimos n suma_parcial k | n == suma_parcial = True
+                                  | suma_parcial > n = False
+                                  | otherwise = sumaNesimoPrimos n (suma_parcial + nEsimoPrimo k) (k+1)
+
+
+
+-- ejercicio 20
+tomaValorMax :: Integer -> Integer -> Integer 
+tomaValorMax n m = maximoActual (n+1) m n
+
+sumaDivisores :: Integer -> Integer -> Integer -> Integer
+sumaDivisores n suma m | m == 1 = 1 + suma
+                       | esDivisible n m == False = sumaDivisores n suma (m-1)
+                       | otherwise = sumaDivisores n (suma + m) (m-1)
+
+maximoActual :: Integer -> Integer -> Integer -> Integer
+maximoActual n m campeon_actual  | n >=m = campeon_actual
+                           | sumaDivisores n 0 n > sumaDivisores campeon_actual 0 campeon_actual = maximoActual (n+1) m n
+                           | otherwise = maximoActual (n+1) m campeon_actual
