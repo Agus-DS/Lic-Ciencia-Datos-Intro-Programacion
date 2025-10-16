@@ -2,6 +2,10 @@
 import unittest
 from guia7 import *
 
+from queue import LifoQueue as Pila
+import random
+from queue import Queue as Cola
+
 def pertenece (lista: list[int], e: int) -> bool:
     return e in lista
    
@@ -120,3 +124,95 @@ print(lista)
 print(CerosEnPosicionesPares(lista))
 print("Lista despuès de la funciòn: ")
 print(lista)
+
+matriz = [[1,2,3],[2,3,4]]
+
+def columna (m:list[int], c:int) -> list[int]:
+    matriz_t = []
+    for i in range(len(m)):
+        for e in range (len(i)):
+            matriz_t = matriz_t.append(e)
+
+# ejercicio 6.4
+"""def columnas_ordeandas (m:list[list[int]]) -> list[bool]:
+    while indiceDeColumnaActual < len(m[0]):
+        columnasOrdenadas.append(estaOrdenado(columnaDeIndice(indiceDeColumnaActual),m))
+        return columnasOrdenadas
+    
+    def columnaDeIndice(indiceDecolumna: int, m:list[list[int]]) -> columna:
+        for indiceDefila in range(len(m)):
+            columnaDeseada.append(M[indiceDefila, indiceDeColumna])
+        return columnaDeseada"""
+    
+
+#ejercicio 1 guia8
+def generar_nros_al_azar (cantidad: int, desde:int, hasta:int) -> Pila:
+    inicio = 0 
+    pila = Pila()
+     
+    while inicio < cantidad:
+        pila.put(random.randint(desde,hasta))
+        inicio += 1
+    return pila
+
+     
+    
+miPila = (generar_nros_al_azar(4,0,10))
+print (miPila.queue)
+
+#ejercicio 3 guia 8
+
+def buscarElMaximo(p:Pila) -> int:
+    lista: list = []
+    elemento: list = []
+
+    while not p.empty():
+        elemento = p.get()
+
+        lista.append(elemento)
+
+    for elemento in range(len(lista)-1,-1,-1):
+        p.put(lista[elemento])
+    
+    maximo_actual:int = lista[0]
+
+    #for i in range(1,len(lista)):
+        #if lista[i] < maximo_actual:
+
+    
+    return maximo_actual 
+
+print(buscarElMaximo(miPila))
+
+#ejercicio 13 guia8
+def armar_secuencia_bingo() -> Cola[int]:
+    cola = Cola()
+    indice = 0
+    while indice < 100:
+        cola.put(random.randint(0,99))
+        indice += 1
+    return cola
+
+carton = armar_secuencia_bingo()
+print(carton.queue)
+
+def carton () -> list[int]:
+    carton = []
+    indice = 0
+    elemento = 0
+    while indice < 12:
+        elemento = random.randint(0,99)
+        if elemento in carton:
+            carton.append(elemento)
+            indice += 1
+        else:
+            carton.append(random.randint(0,99))
+            indice += 1
+    return carton
+print(carton())
+
+def jugar_carton_de_bingo(carton:list[int],bolillero:Cola[int]) -> int:
+    jugada = 0
+    numeroDelBolillero = 0
+    while jugada <= 100:
+        boli
