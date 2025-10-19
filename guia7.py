@@ -1,10 +1,4 @@
 #Ejercicio 1.1 
-import unittest
-from guia7 import *
-
-from queue import LifoQueue as Pila
-import random
-from queue import Queue as Cola
 
 def pertenece (lista: list[int], e: int) -> bool:
     return e in lista
@@ -22,20 +16,24 @@ def pertenece2 (lista: list[int], e: int) -> bool:
 #ejercicio 1.2
 
 def divide_a_todos(lista: list[int], e: int) -> bool:
+    if not lista:
+        divide = False
+        return divide 
+    
     divide = True
     indice = 0
     while indice < len(lista) :
         for i in range(len(lista)):
-            if e % lista[i] != 0:
+            if   lista[i] % e != 0:
                 divide = False
             indice +=1
         
         
     return divide
 
-print(divide_a_todos([1,3,3,2],4))
+print(divide_a_todos([3,3,4],2))
 
-    
+
 # ejercicio 1.3
 
 def suma_total (s: list[int]) -> int:
@@ -52,17 +50,27 @@ print(suma_total([1,2]))
 #ejercicio 1.4
 
 def maximo (lista:list[int]) -> int:
+    if not lista:
+        max_actual = 0
+        return max_actual
+    
     max_actual: int = lista[0]
+    
     for i in range(len(lista)):
+        
         if max_actual <= lista[i]:
             max_actual = lista[i]
     return max_actual
 
-print(maximo([1,2,3,4]))
+print(maximo([1,2,4,2]))
 
 #ejercicio 1.5
 
 def minimo (lista:list[int]) -> int:
+    if not lista:
+        min_actual = 0
+        return min_actual
+    
     min_actual: int = lista[0]
     for i in range(len(lista)):
         if min_actual >= lista[i]:
@@ -76,7 +84,12 @@ print(minimo([3,2,3,1]))
 def ordenados(lista:list[int]) -> bool:
     orden = True
     indice = 0
+    if not lista:
+        orden = True
+        return orden
+    
     elemento = lista[0]
+
     while indice < len(lista):
         for i in range(len(lista)):
             if elemento > lista[i]:
@@ -97,17 +110,174 @@ def pos_maximo(lista:list[int]) -> int:
     pos_max: int = 0
     max_actual: int = lista[0]
     for i in range(1,len(lista)):
-        if max_actual <= lista[i]:
+        if max_actual <lista[i]:
             max_actual = lista[i]
             pos_max = i
     
     return pos_max
 
-print(pos_maximo([1,2,8,1,2]))
+print(pos_maximo([9,3,8,1,9]))
+
+#ejercicio 1.8
+
+def pos_minimo(lista:list[int]) -> int:
+    if not lista:
+        return -1
+    
+    pos_min: int = 0
+    min_actual: int = lista[0]
+    for i in range(1,len(lista)):
+        if min_actual >= lista[i]:
+            min_actual = lista[i]
+            pos_min = i
+    
+    return pos_min
+
+print(pos_minimo([1,1,2,2]))
+
+
+
+#ejercicio 1.9
+
+def long_mayor_a_siete (lista:list[str]) -> bool:
+    long_palabra = 7
+    long_mayor_siete = False
+    for p in lista:
+        if len(p) > long_palabra:
+            long_mayor_siete = True
+
+    return long_mayor_siete
+
+print (long_mayor_a_siete(['bue','es','esto','salud']))
+
+#ejercicio 1.10
+
+def reverso(palabra:str) -> str:
+    reverso = palabra[::-1]
+    return reverso
+
+def es_palindroma(palabra:str)-> bool:
+    palindroma = False
+    if not palabra:
+        palindroma = True
+        return palindroma
+    if palabra == reverso(palabra):
+        palindroma = True
+    elif len(palabra) == 1:
+        palindroma = True 
+
+    return palindroma
+
+print(es_palindroma('bue'))
+
+#ejercicio 1.11
+
+def iguales_consecutivos(lista:list[int]) -> bool:
+    
+    contador_repetidos = 1
+
+    if not lista:
+        tres_consecutivos = False
+        return tres_consecutivos
+    
+    tres_consecutivos = False
+    numero_anterior = lista[0]
+    
+    for n in range(1,len(lista)):
+        if lista[n] == numero_anterior:
+            numero_anterior = lista[n]
+            contador_repetidos += 1
+            if contador_repetidos == 3:
+                tres_consecutivos = True
+        else:
+            numero_anterior = lista[n]
+            contador_repetidos = 1
+    
+
+    return tres_consecutivos
+
+print(iguales_consecutivos([1,2,2,3,3,3]))
+
+#ejercicio 1.12
+print('ejercicio 1.12')
+def hay_repetidos(lista:list[str]) -> bool:
+    repetidos = False
+    for i in range(len(lista)):
+       if pertenece(lista[i+1::],lista[i]):
+           repetidos = True
+    return repetidos
+
+
+
+def vocales_distintas(palabra:str) -> bool:
+    vocales = ['a','e','i','o','u']
+    vocales_palabra = []
+    for i in palabra:
+        if i in vocales:
+            vocales_palabra.append(i)
+    
+    return hay_repetidos(vocales_palabra)
+
+print(vocales_distintas('vaso'))
+
+#ejercicio 1.13
+print('#ejercicio 1.13')
+
+def ordenados2(lista:list[str]) -> bool:
+    orden = True
+    indice = 0
+    elemento = lista[0]
+    while indice < len(lista):
+        for i in range(len(lista)):
+            if elemento > lista[i]:
+                orden = False
+            elemento = lista[i]
+            indice +=1
+    return orden
+
+print(ordenados2('48'))
+
+def pos_sec_oredenada_mas_larga(lista:list[int]) -> int:
+    if not lista:
+        posicion = 0
+        return posicion
+    
+    posicion = 0
+    secuencia_mas_larga = str(lista[0])
+    
+    for i in range(1,len(lista)):
+
+        if ordenados2(str(lista[i])):
+            if len(secuencia_mas_larga) < len(str(lista[i])):
+                posicion  = i
+                secuencia_mas_larga = str(lista[i])
+    return posicion
+        
+print(pos_sec_oredenada_mas_larga([1,2,14,237]))
+
+#ejercicio 1.14
 
 def es_par(e:int) -> bool:
     par = e%2 == 0
     return par
+
+def cantidad_digitos_impares(lista:list[int]) -> int:
+    digitos_impares = 0
+
+    if not lista:
+        return digitos_impares
+    
+    for e in lista:
+       for digito in str(e):
+        if not es_par (int(digito)) :
+           digitos_impares += 1
+    
+    return digitos_impares
+        
+print(cantidad_digitos_impares([1,4,52,33,283]))
+    
+
+#ejercicio 2.1
 
 
 lista = [1,2,3,4,5]
@@ -125,13 +295,99 @@ print(CerosEnPosicionesPares(lista))
 print("Lista despuès de la funciòn: ")
 print(lista)
 
-matriz = [[1,2,3],[2,3,4]]
+#ejercicio 2.3
+
+def sin_vocales(palabra:str) -> str:
+    vocales = ['a','e','i','o','u']
+    palabra_sin_vocales = ''
+    
+    if palabra == '':
+        return palabra_sin_vocales
+
+    for l in palabra:
+        if not l in vocales:
+            palabra_sin_vocales += l
+
+    return palabra_sin_vocales
+
+print(sin_vocales('Hola'))
+
+#ejercicio 2.4
+
+def reemplaza_vocales(palabra:str) -> str:
+    vocales = ['a','e','i','o','u']
+    palabra_reemplazada = ''
+
+    if palabra == '':
+        return palabra_reemplazada
+    else:
+        for p in palabra:
+            if p in vocales:
+                palabra_reemplazada += '-'
+            else:
+                palabra_reemplazada += p
+        return palabra_reemplazada
+    
+print(reemplaza_vocales(''))
+
+#ejercicio 2.5
+
+def da_vuelta_str(palabra:str) -> str:
+    palabra_al_reves = ''
+    if palabra == '':
+        return palabra_al_reves
+    else:
+        for i in range(len(palabra)):
+            palabra_al_reves += palabra[len(palabra)-i-1]
+    
+    return palabra_al_reves
+
+print(da_vuelta_str('rosa'))
+
+#ejercicio 2.6
+
+def eliminar_repetidos(palabra:str) -> str:
+    palabra_sin_repetidos = ''
+    if palabra == '':
+        return palabra_sin_repetidos
+    else:
+        for p in range(len(palabra)):
+            if not pertenece(palabra[p+1::],palabra[p]):
+                palabra_sin_repetidos += palabra[p]
+        return palabra_sin_repetidos
+print('#ejercicio 2.6')
+print(eliminar_repetidos('masa'))
+
+#ejercicio 3
+
+def resultado_materia(notas:list[int]) -> int:
+    promedio = 0
+    suma_notas = 0
+    resu = 0
+    for n in notas:
+        suma_notas += n
+        promedio = suma_notas/len(notas)
+        if n >= 4 and promedio >=7:
+            resu = 1
+        elif n >=4 and (promedio <7 or promedio >=4):
+            resu = 2
+        elif n < 4:
+            resu = 3
+            return resu 
+        
+    return resu
+print(resultado_materia([4,4,4,4]))
+
+
+
 
 def columna (m:list[int], c:int) -> list[int]:
     matriz_t = []
     for i in range(len(m)):
         for e in range (len(i)):
             matriz_t = matriz_t.append(e)
+
+        
 
 # ejercicio 6.4
 """def columnas_ordeandas (m:list[list[int]]) -> list[bool]:
@@ -143,76 +399,3 @@ def columna (m:list[int], c:int) -> list[int]:
         for indiceDefila in range(len(m)):
             columnaDeseada.append(M[indiceDefila, indiceDeColumna])
         return columnaDeseada"""
-    
-
-#ejercicio 1 guia8
-def generar_nros_al_azar (cantidad: int, desde:int, hasta:int) -> Pila:
-    inicio = 0 
-    pila = Pila()
-     
-    while inicio < cantidad:
-        pila.put(random.randint(desde,hasta))
-        inicio += 1
-    return pila
-
-     
-    
-miPila = (generar_nros_al_azar(4,0,10))
-print (miPila.queue)
-
-#ejercicio 3 guia 8
-
-def buscarElMaximo(p:Pila) -> int:
-    lista: list = []
-    elemento: list = []
-
-    while not p.empty():
-        elemento = p.get()
-
-        lista.append(elemento)
-
-    for elemento in range(len(lista)-1,-1,-1):
-        p.put(lista[elemento])
-    
-    maximo_actual:int = lista[0]
-
-    #for i in range(1,len(lista)):
-        #if lista[i] < maximo_actual:
-
-    
-    return maximo_actual 
-
-print(buscarElMaximo(miPila))
-
-#ejercicio 13 guia8
-def armar_secuencia_bingo() -> Cola[int]:
-    cola = Cola()
-    indice = 0
-    while indice < 100:
-        cola.put(random.randint(0,99))
-        indice += 1
-    return cola
-
-carton = armar_secuencia_bingo()
-print(carton.queue)
-
-def carton () -> list[int]:
-    carton = []
-    indice = 0
-    elemento = 0
-    while indice < 12:
-        elemento = random.randint(0,99)
-        if elemento in carton:
-            carton.append(elemento)
-            indice += 1
-        else:
-            carton.append(random.randint(0,99))
-            indice += 1
-    return carton
-print(carton())
-
-def jugar_carton_de_bingo(carton:list[int],bolillero:Cola[int]) -> int:
-    jugada = 0
-    numeroDelBolillero = 0
-    while jugada <= 100:
-        boli
