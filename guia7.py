@@ -379,7 +379,61 @@ def resultado_materia(notas:list[int]) -> int:
 print(resultado_materia([4,4,4,4]))
 
 
+def saldo(movimientos:list[tuple[str,int]]) -> int:
+    ingresos = 0
+    retiros = 0
+    for movimiento in movimientos:
+        if movimiento[0] == 'I':
+            ingresos += movimiento[1]
+        else:
+             retiros +=  movimiento[1] 
+    return ingresos-retiros
 
+print(saldo([('I',2000),('R',1000),('I',500),('R',200)]))
+
+
+#ejercicio 5.1
+
+print("Ejercicio 5.1")
+def pertenece_a_cada_uno_v1(lista:list[list[int]],elemento: int) -> list[bool]:
+    lista_bool = []
+    for l in lista:
+        if pertenece(l,elemento):
+            lista_bool.append(True)
+        else:
+            lista_bool.append(False)
+    return lista_bool
+
+print(pertenece_a_cada_uno_v1([[1,4],[2,3]],4))
+
+#Ejercicio 6.1
+
+def es_matriz(matriz: list[list[int]]) -> bool:
+    es_matriz_bool = False
+    longitud_fila = len(matriz[0])
+    for i in range(len(matriz)):
+        if len(matriz[i]) == longitud_fila:
+            es_matriz_bool = True
+        else:
+            es_matriz_bool = False
+    
+    return es_matriz_bool
+
+print(es_matriz([[2,3,4],[2,3,3],[2,2]]))
+
+#Ejercicio 6.2
+print("#Ejercicio 6.2")
+def filas_ordenadas(matriz:list[list[int]]) -> list[bool]:
+    fila_ordenada = []
+    for f in matriz:
+        if ordenados(f):
+            fila_ordenada.append(True)
+        else:
+            fila_ordenada.append(False)
+    
+    return fila_ordenada
+
+print(filas_ordenadas([[1,2],[4,3]]))
 
 def columna (m:list[int], c:int) -> list[int]:
     matriz_t = []
