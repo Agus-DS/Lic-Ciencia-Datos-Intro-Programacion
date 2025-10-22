@@ -435,21 +435,49 @@ def filas_ordenadas(matriz:list[list[int]]) -> list[bool]:
 
 print(filas_ordenadas([[1,2],[4,3]]))
 
+# ejercicio 6.3
+
 def columna (m:list[int], c:int) -> list[int]:
     matriz_t = []
-    for i in range(len(m)):
-        for e in range (len(i)):
-            matriz_t = matriz_t.append(e)
+    for f in m:
+        matriz_t.append(f[c])
+    return matriz_t
 
+print(columna([[1,2],[3,4]],0))
         
 
-# ejercicio 6.4
-"""def columnas_ordeandas (m:list[list[int]]) -> list[bool]:
-    while indiceDeColumnaActual < len(m[0]):
-        columnasOrdenadas.append(estaOrdenado(columnaDeIndice(indiceDeColumnaActual),m))
-        return columnasOrdenadas
     
-    def columnaDeIndice(indiceDecolumna: int, m:list[list[int]]) -> columna:
-        for indiceDefila in range(len(m)):
-            columnaDeseada.append(M[indiceDefila, indiceDeColumna])
-        return columnaDeseada"""
+# ejercicio 6.4
+
+print("ejercicio 6.4")
+def columnas_ordeandas (matriz:list[list[int]]) -> list[bool]:
+    estan_ordenadas = []
+
+    for indiceColumna in range(len(matriz)):
+
+        estan_ordenadas.append(ordenados(columna(matriz,indiceColumna)))
+
+    return estan_ordenadas
+
+print(columnas_ordeandas([[3,6,9],[4,7,8],[5,8,3]]))
+
+
+#ejercicio 6.5
+
+print("#ejercicio 6.5")
+
+def transponer(matriz:list[list[int]]) -> list[list[int]]:
+    matriz_transpuesta = []
+   
+    for indiceColumna in range(len(matriz)):
+        matriz_transpuesta.append(columna(matriz,indiceColumna))
+    
+    return matriz_transpuesta
+
+print("Matriz A:[[1,2],[3,4]] ")
+print(transponer([[1,2],[3,4]]))
+
+#ejercicio 6.6
+
+def quien_gana_tateti(tateti:list[list[int]]) -> int:
+    
