@@ -479,5 +479,166 @@ print(transponer([[1,2],[3,4]]))
 
 #ejercicio 6.6
 
-def quien_gana_tateti(tateti:list[list[int]]) -> int:
+print("#ejercicio 6.6")
+
+def gana_vertical(tateti:list[list[str]]) -> int:
+    ganaX = 1
+    ganaO = 0
+    empate = 2
+    for i in range(len(tateti)):
+        contador_elementoX = 0
+        contador_elementoO = 0
+        for elemento in columna(tateti,i):
+            if elemento == "x":
+                contador_elementoX += 1
+            elif elemento == "o":
+                contador_elementoO +=1
+        
+            if contador_elementoX == 3:
+                return ganaX
+            elif contador_elementoO == 3:
+                return ganaO
+    return empate
+
+def gana_horizontal(tateti:list[list[str]]) -> int:
+    ganaX = 1
+    ganaO = 0
+    empate = 2
+    for fila in tateti:
+        contador_elementoX = 0
+        contador_elementoO = 0
+        for elemento in fila:
+            if elemento == "x":
+                contador_elementoX += 1
+            elif elemento == "o":
+                contador_elementoO += 1
+            if contador_elementoX== 3:
+                return ganaX
+            elif contador_elementoO == 3:
+                return ganaO
+    return empate
+
+
+
+
+def gana_diagonal(tateti:list[list[str]]) -> int:
+    ganaX = 1
+    ganaO = 0
+    empate = 2
+    if tateti[0][0] == "x" and tateti[1][1] == "x" and tateti[2][2] == "x":
+        return ganaX
+    elif tateti[0][0] == "o" and tateti[1][1] == "o" and tateti[2][2] == "o":
+        return ganaO
+    elif tateti[0][2] == "x" and tateti[1][1] == "x" and tateti[2][0] == "x":
+        return ganaX
+    elif tateti[0][2] == "o" and tateti[1][1] == "o" and tateti[2][0] == "o":
+        return ganaO
+    else:
+        return empate
+
+def quien_gana_tateti(tateti:list[list[str]]) -> int:
+    ganaX = 1
+    ganaO = 0
+    empate = 2
+    gana_v = gana_vertical(tateti)
+    gana_h = gana_horizontal(tateti)
+    gana_d = gana_diagonal(tateti)
+
+    if gana_v == ganaX or gana_v == ganaO:
+        return gana_v
+    elif gana_h == ganaX or gana_h == ganaO:
+        return gana_h
+    elif gana_d == ganaX or gana_d == ganaO:
+        return gana_d
+    else:
+        return empate
+
+
+print(quien_gana_tateti([["x","o",""],["x","x","o"],["x","o","o"]]))
+#print(gana_horizontal([["x","x","o"],["o","x","o"],["x","o","o"]]))
+
+
+#ejercicio 7.1
+
+def lista_estudiantes() -> list[str]:
+    lista_est = []
+    agrego_estudiante = True
+    while agrego_estudiante:
+        estudiante = input('Vamos a crear una lista de estudiantes, cuando quieras terminar. Escribí listo o da enter: ')
+        if estudiante == 'listo' or estudiante == '':
+            agrego_estudiante = False
+        else:
+            lista_est.append(estudiante)
     
+    return(lista_est)
+
+print(lista_estudiantes())
+
+#ejercicio 7.2
+
+def calculo_el_saldo(historial:tuple[str,int]) -> int:
+    saldo = 0
+    for movimiento in historial:
+        if movimiento[0] == "C":
+            saldo += movimiento[1]
+        else:
+            saldo = saldo - movimiento[1]
+    return saldo
+
+def carga_la_sube_rata() -> list[tuple[str,int]]:
+    historial = []
+    agrego_movimientos = True
+    saldo = 0
+    while agrego_movimientos:
+        movimiento = input('Elegí tu operación, poneiendo la letra correspondiente en mayísciñas.: \n C: Carga crédito \n D: Retirás crédito \n X: Listo! \n -->: ')
+        if movimiento == "C":
+            carga = int(input('Pasame el valor a cargar: '))
+            historial.append(("C",carga))
+        elif movimiento == "D":
+            descarga = int(input("Cuánto vas a retirar?: "))
+            historial.append(("D",descarga))
+        elif movimiento == "X":
+            agrego_movimientos = False
+        else:
+            print("Tenés que elegir una opción \n")
+    saldo = calculo_el_saldo(historial)
+    return historial
+
+
+print(carga_la_sube_rata())
+
+import random
+from random import shuffle
+
+
+def sumo_carta(carta:int) -> int:
+    puntaje = 0
+    if carta == 10 or carta == 11 or carta == 12:
+        puntaje += 0.5
+    else:
+        puntaje += carta           
+    return puntaje
+
+def siete_y_medio() -> list[int]:
+    historial_cartas = []
+    cartas = [1,2,3,4,5,6,7,10,11,12]
+    shuffle(cartas)
+    sigo_sacando = True
+    carta = 0
+    puntaje = 0
+    while sigo_sacando:
+        eleccion = input("Escribí si 'saco'o 'me planto': ")
+        if eleccion == 'saco':
+           carta = cartas.pop()
+           historial_cartas.append(carta)
+           puntaje += sumo_carta(carta)
+
+        elif eleccion == 'me planto' or len(cartas) == 0:
+            sigo_sacando = False
+    if puntaje > 7.5:
+        print("Perdiste")
+    else:
+        print("Ganaste")
+    return historial_cartas
+
+print(siete_y_medio())
