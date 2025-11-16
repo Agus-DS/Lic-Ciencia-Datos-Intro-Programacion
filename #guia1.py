@@ -319,4 +319,21 @@ def viaje_en_el_tiempo2_v2(start_year: int, end_year:int) -> str:
 
 viaje_en_el_tiempo2_v2(2025,-384)
 
+print("\nEjercicio 9\n")
 
+
+def rt(x: int, g: int) -> int:
+    g = g + 1
+    return x + g
+g: int = 0
+def ro(x: int) -> int:
+    global g
+    g = g + 1
+    return x + g
+
+print(ro(1))
+print(ro(1))
+print(ro(1))
+print(rt(1,0))
+print(rt(1,0))
+print(rt(1,0))
